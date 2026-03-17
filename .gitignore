@@ -1,0 +1,8 @@
+# IDE (JetBrains / PhpStorm)
+.idea/
+
+# Carpetas antiguas (no se usan con la nueva estructura Laravel)
+style/
+
+# Memoria del proyecto (uso interno del agente IA)
+MEMORIA_PROYECTO.md
