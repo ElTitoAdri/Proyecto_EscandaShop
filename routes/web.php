@@ -4,7 +4,14 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    $categories = \App\Models\Category::all();
+    $products = \App\Models\Product::with('images')
+        ->where('is_visible', true)
+        ->latest()
+        ->take(8)
+        ->get();
+
+    return view('welcome', compact('categories', 'products'));
 });
 
 Route::get('/dashboard', function () {
@@ -24,4 +31,4 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     })->name('dashboard');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
