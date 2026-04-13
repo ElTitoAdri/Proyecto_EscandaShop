@@ -8,6 +8,7 @@ style/
 # Memoria del proyecto (uso interno)
 MEMORIA_PROYECTO.md
 GUIA_INSTALACION.md
+RESUMEN_PROYECTO.md
 
 # Laravel Default
 *.log
