@@ -43,7 +43,11 @@
 
         .bg-brand-white { background-color: var(--brand-white); }
         .bg-brand-gray { background-color: var(--brand-gray); }
+        .bg-brand-dark { background-color: var(--brand-dark); }
+        .bg-brand-charcoal { background-color: var(--brand-charcoal); }
+        .hover\:bg-brand-charcoal:hover { background-color: var(--brand-charcoal); }
         .text-brand-charcoal { color: var(--brand-charcoal); }
+        .text-brand-dark { color: var(--brand-dark); }
         .border-brand-charcoal { border-color: var(--brand-charcoal); }
 
         .hero-gradient {
@@ -90,12 +94,23 @@
                 </div>
                 
                 <div class="hidden md:flex space-x-8 items-center">
+                    <a href="{{ route('home') }}" class="text-sm font-medium hover:text-brand-charcoal transition dark:text-gray-400 dark:hover:text-white {{ !request('category') ? 'font-bold' : '' }}">Todos</a>
                     @foreach($categories as $category)
-                        <a href="#" class="text-sm font-medium hover:text-brand-charcoal transition dark:text-gray-400 dark:hover:text-white">{{ $category->name }}</a>
+                        <a href="{{ route('home', ['category' => $category->slug]) }}" class="text-sm font-medium hover:text-brand-charcoal transition dark:text-gray-400 dark:hover:text-white {{ request('category') == $category->slug ? 'font-bold underline' : '' }}">{{ $category->name }}</a>
                     @endforeach
                 </div>
 
                 <div class="flex items-center space-x-4 md:space-x-6">
+                    <!-- Search Bar -->
+                    <form action="{{ route('home') }}" method="GET" class="hidden md:block relative">
+                        @if(request('category'))
+                            <input type="hidden" name="category" value="{{ request('category') }}">
+                        @endif
+                        <input type="text" name="search" placeholder="Buscar joya..." value="{{ request('search') }}"
+                            class="pl-8 pr-3 py-1.5 bg-gray-100 border-none rounded-full text-sm focus:ring-1 focus:ring-brand-charcoal dark:bg-white/10 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 w-48 transition-all hover:w-64 focus:w-64 z-10">
+                        <svg class="w-4 h-4 text-gray-400 absolute left-2.5 top-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </form>
+
                     @if (Route::has('login'))
                         @auth
                             <a href="{{ url('/dashboard') }}" class="text-sm font-medium hover:text-brand-charcoal dark:text-gray-300">Mi Cuenta</a>
@@ -148,8 +163,9 @@
     <!-- Categories Bar -->
     <div class="bg-brand-gray py-4 border-b border-gray-200 dark:border-white/10">
         <div class="max-w-7xl mx-auto px-4 flex justify-center space-x-12 overflow-x-auto whitespace-nowrap scrollbar-hide py-2">
+            <a href="{{ route('home') }}" class="text-xs uppercase tracking-[0.2em] font-semibold transition dark:hover:text-white {{ !request('category') ? 'text-brand-charcoal dark:text-white border-b-2 border-brand-charcoal' : 'text-gray-500 dark:text-gray-400 hover:text-brand-charcoal' }}">Colección Completa</a>
             @foreach($categories as $category)
-                <a href="#" class="text-xs uppercase tracking-[0.2em] text-gray-500 hover:text-brand-charcoal font-semibold transition dark:text-gray-400 dark:hover:text-white">{{ $category->name }}</a>
+                <a href="{{ route('home', ['category' => $category->slug]) }}" class="text-xs uppercase tracking-[0.2em] font-semibold transition dark:hover:text-white {{ request('category') == $category->slug ? 'text-brand-charcoal dark:text-white border-b-2 border-brand-charcoal' : 'text-gray-500 dark:text-gray-400 hover:text-brand-charcoal' }}">{{ $category->name }}</a>
             @endforeach
         </div>
     </div>
@@ -158,7 +174,15 @@
     <section id="catalog" class="py-24 bg-brand-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-serif text-brand-dark mb-4 uppercase tracking-wider">Lo más destacado</h2>
+                <h2 class="text-3xl md:text-4xl font-serif text-brand-dark mb-4 uppercase tracking-wider">
+                    @if(request('search'))
+                        Resultados para: "{{ request('search') }}"
+                    @elseif(request('category'))
+                        Colección: {{ $categories->firstWhere('slug', request('category'))->name ?? request('category') }}
+                    @else
+                        Lo más destacado
+                    @endif
+                </h2>
                 <div class="w-16 h-1 bg-brand-charcoal mx-auto"></div>
             </div>
 
@@ -206,8 +230,8 @@
                 @endforeach
             </div>
 
-            <div class="mt-20 text-center">
-                <a href="#" class="inline-block border-b-2 border-brand-charcoal pb-1 text-sm font-semibold tracking-widest uppercase hover:text-brand-charcoal hover:border-black transition dark:text-gray-400 dark:hover:text-white">Ver todo el catálogo</a>
+            <div class="mt-16">
+                {{ $products->links() }}
             </div>
         </div>
     </section>

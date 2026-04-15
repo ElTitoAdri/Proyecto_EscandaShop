@@ -18,13 +18,27 @@ class DatabaseSeeder extends Seeder
         // 1. Create 4 Users
         $users = \App\Models\User::factory(4)->create();
 
-        // 2. Create 4 Categories
-        $categories = \App\Models\Category::factory(4)->create();
+        // 2. Create 4 Categories en español
+        $categories = collect();
+        $catData = [
+            ['name' => 'Pendientes', 'slug' => 'pendientes', 'description' => 'Pendientes exclusivos de oro y plata.'],
+            ['name' => 'Anillos', 'slug' => 'anillos', 'description' => 'Anillos de compromiso y diseño propio.'],
+            ['name' => 'Pulseras', 'slug' => 'pulseras', 'description' => 'Pulseras artesanales y brazaletes.'],
+            ['name' => 'Collares', 'slug' => 'collares', 'description' => 'Gargantillas y collares con diamantes.']
+        ];
+        foreach ($catData as $data) {
+            $categories->push(\App\Models\Category::create($data));
+        }
 
         // 3. Create 4 Products (one for each category)
         $products = collect();
-        foreach ($categories as $category) {
-            $products->push(\App\Models\Product::factory()->create(['category_id' => $category->id]));
+        $prodNames = ['Pendientes Lágrima', 'Anillo Solitario', 'Pulsera Eslabones', 'Collar Perla Nacarada'];
+        foreach ($categories as $i => $category) {
+            $products->push(\App\Models\Product::factory()->create([
+                'category_id' => $category->id,
+                'name' => $prodNames[$i],
+                'description' => 'Un espectacular diseño de ' . strtolower($prodNames[$i]) . ' fabricado y pulido a mano. Accesorio indispensable para ocasiones especiales.',
+            ]));
         }
 
         // 4. Create 4 Product Images (one per product)
