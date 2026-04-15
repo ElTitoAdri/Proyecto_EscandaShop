@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    :root {
+        /* Brand Colors */
+        --brand-charcoal: #5D574F;
+        --brand-gray: #F2F2F2;
+        --brand-dark: #333333;
+        --brand-white: #FFFFFF;
+
+        /* Brand Fonts */
+        --font-serif: 'Playfair Display', serif;
+        --font-sans: 'Inter', sans-serif;
+    }
+
+    .dark {
+        --brand-charcoal: #A19B94;
+        --brand-gray: #161615;
+        --brand-dark: #EDEDEC;
+        --brand-white: #0A0A0A;
+    }
+
+    body {
+        @apply antialiased;
+        font-family: var(--font-sans);
+        color: var(--brand-dark);
+        background-color: var(--brand-white);
+        transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+}

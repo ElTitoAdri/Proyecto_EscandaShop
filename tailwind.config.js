@@ -12,8 +12,17 @@ export default {
 
     theme: {
         extend: {
+            colors: {
+                brand: {
+                    charcoal: 'var(--brand-charcoal)',
+                    gray: 'var(--brand-gray)',
+                    dark: 'var(--brand-dark)',
+                    white: 'var(--brand-white)',
+                },
+            },
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Inter', ...defaultTheme.fontFamily.sans],
+                serif: ['Playfair Display', ...defaultTheme.fontFamily.serif],
             },
         },
     },

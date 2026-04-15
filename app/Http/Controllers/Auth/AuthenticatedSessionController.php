@@ -28,7 +28,54 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        // Persist Cart
+        $this->mergeCart($request);
+
+        return redirect()->intended('/');
+    }
+
+    protected function mergeCart(Request $request)
+    {
+        $user = Auth::user();
+        $sessionCart = $request->session()->get('cart', []);
+
+        if (!empty($sessionCart)) {
+            foreach ($sessionCart as $productId => $details) {
+                // Si el producto NO existe en la base de datos del usuario, lo añadimos
+                if (!$user->cartItems()->where('product_id', $productId)->exists()) {
+                    $user->cartItems()->create([
+                        'product_id' => $productId,
+                        'quantity' => $details['quantity']
+                    ]);
+                }
+            }
+            // Limpiamos la sesión después de la fusión para evitar duplicidad visual
+            $request->session()->forget('cart');
+        }
+
+        // Cargamos el carrito de la DB a la sesión para que la UI lo vea
+        $this->syncSessionWithDb($request, $user);
+    }
+
+    protected function syncSessionWithDb(Request $request, $user)
+    {
+        $dbCart = [];
+        $cartItems = $user->cartItems()->with('product.images')->get();
+
+        foreach ($cartItems as $item) {
+            $product = $item->product;
+            $primaryImage = $product->images->where('is_primary', true)->first() ?? $product->images->first();
+            
+            $dbCart[$product->id] = [
+                "name" => $product->name,
+                "quantity" => $item->quantity,
+                "price" => $product->price,
+                "image" => $primaryImage ? $primaryImage->url : 'https://placehold.co/600x600?text=' . urlencode($product->name),
+                "slug" => $product->slug
+            ];
+        }
+
+        $request->session()->put('cart', $dbCart);
     }
 
     /**

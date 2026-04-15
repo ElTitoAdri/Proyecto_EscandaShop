@@ -31,6 +31,6 @@ class CatalogController extends Controller
 
         $products = $query->latest()->paginate(12)->withQueryString();
 
-        return view('welcome', compact('categories', 'products'));
+        return view('store.index', compact('categories', 'products'));
     }
 }
