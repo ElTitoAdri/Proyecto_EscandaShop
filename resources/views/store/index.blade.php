@@ -16,9 +16,9 @@
     <!-- Categories Bar -->
     <div class="bg-brand-gray py-4 border-b border-gray-200 dark:border-white/10">
         <div class="max-w-7xl mx-auto px-4 flex justify-center space-x-12 overflow-x-auto whitespace-nowrap scrollbar-hide py-2">
-            <a href="{{ route('home') }}" class="text-xs uppercase tracking-[0.2em] font-semibold transition dark:hover:text-white {{ !request('category') ? 'text-brand-charcoal dark:text-white border-b-2 border-brand-charcoal' : 'text-gray-500 dark:text-gray-400 hover:text-brand-charcoal' }}">Colección Completa</a>
+            <a href="{{ route('store.index') }}" class="text-xs uppercase tracking-[0.2em] font-semibold transition dark:hover:text-white {{ !request('category') ? 'text-brand-charcoal dark:text-white border-b-2 border-brand-charcoal' : 'text-gray-500 dark:text-gray-400 hover:text-brand-charcoal' }}">Colección Completa</a>
             @foreach($categories as $category)
-                <a href="{{ route('home', ['category' => $category->slug]) }}" class="text-xs uppercase tracking-[0.2em] font-semibold transition dark:hover:text-white {{ request('category') == $category->slug ? 'text-brand-charcoal dark:text-white border-b-2 border-brand-charcoal' : 'text-gray-500 dark:text-gray-400 hover:text-brand-charcoal' }}">{{ $category->name }}</a>
+                <a href="{{ route('store.index', ['category' => $category->slug]) }}" class="text-xs uppercase tracking-[0.2em] font-semibold transition dark:hover:text-white {{ request('category') == $category->slug ? 'text-brand-charcoal dark:text-white border-b-2 border-brand-charcoal' : 'text-gray-500 dark:text-gray-400 hover:text-brand-charcoal' }}">{{ $category->name }}</a>
             @endforeach
         </div>
     </div>

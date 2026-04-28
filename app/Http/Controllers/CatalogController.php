@@ -29,7 +29,34 @@ class CatalogController extends Controller
             });
         }
 
-        $products = $query->latest()->paginate(12)->withQueryString();
+        // Precio Mínimo
+        if ($request->has('min_price') && $request->min_price != '') {
+            $query->where('price', '>=', $request->min_price);
+        }
+
+        // Precio Máximo
+        if ($request->has('max_price') && $request->max_price != '') {
+            $query->where('price', '<=', $request->max_price);
+        }
+
+        // Ordenación
+        if ($request->has('sort') && $request->sort != '') {
+            switch ($request->sort) {
+                case 'price_asc':
+                    $query->orderBy('price', 'asc');
+                    break;
+                case 'price_desc':
+                    $query->orderBy('price', 'desc');
+                    break;
+                case 'newest':
+                    $query->latest();
+                    break;
+            }
+        } else {
+            $query->latest(); // Ordenación por defecto
+        }
+
+        $products = $query->paginate(12)->withQueryString();
 
         return view('store.index', compact('categories', 'products'));
     }

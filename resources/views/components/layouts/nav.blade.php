@@ -45,15 +45,65 @@
             </div>
 
             <div class="flex items-center space-x-4 md:space-x-6">
-                <!-- Search Bar -->
-                <form action="{{ route('home') }}" method="GET" class="hidden md:block relative">
-                    @if(request('category'))
-                        <input type="hidden" name="category" value="{{ request('category') }}">
-                    @endif
-                    <input type="text" name="search" placeholder="Buscar joya..." value="{{ request('search') }}"
-                        class="pl-8 pr-3 py-1.5 bg-gray-100 border-none rounded-full text-sm focus:ring-1 focus:ring-brand-charcoal dark:bg-white/10 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 w-48 transition-all hover:w-64 focus:w-64 z-10">
-                    <svg class="w-4 h-4 text-gray-400 absolute left-2.5 top-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                </form>
+                <!-- Search & Filters -->
+                <div class="hidden md:block relative" x-data="{ filtersOpen: false }">
+                    <form action="{{ route('store.index') }}" method="GET" class="flex items-center">
+                        @if(request('category'))
+                            <input type="hidden" name="category" value="{{ request('category') }}">
+                        @endif
+                        <div class="relative">
+                            <input type="text" name="search" placeholder="Buscar joya..." value="{{ request('search') }}"
+                                class="pl-8 pr-10 py-1.5 bg-gray-100 border-none rounded-full text-sm focus:ring-1 focus:ring-brand-charcoal dark:bg-white/10 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 w-48 transition-all hover:w-64 focus:w-64 z-10">
+                            <svg class="w-4 h-4 text-gray-400 absolute left-2.5 top-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            
+                            <!-- Toggle Filters Button (inside input) -->
+                            <button type="button" @click="filtersOpen = !filtersOpen" class="absolute right-2 top-1.5 text-gray-400 hover:text-brand-charcoal dark:hover:text-white transition-colors" title="Filtros Avanzados">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Dropdown Panel -->
+                        <div x-show="filtersOpen" 
+                             style="display: none;"
+                             @click.away="filtersOpen = false"
+                             x-transition:enter="transition ease-out duration-200"
+                             x-transition:enter-start="opacity-0 translate-y-2"
+                             x-transition:enter-end="opacity-100 translate-y-0"
+                             x-transition:leave="transition ease-in duration-150"
+                             x-transition:leave-start="opacity-100 translate-y-0"
+                             x-transition:leave-end="opacity-0 translate-y-2"
+                             class="absolute right-0 top-12 w-72 bg-white dark:bg-brand-gray shadow-2xl border border-gray-100 dark:border-white/5 rounded-xl p-5 z-50">
+                            
+                            <h3 class="text-xs uppercase tracking-widest font-bold text-brand-charcoal dark:text-gray-300 mb-4 border-b border-gray-100 dark:border-white/5 pb-2">Filtros Avanzados</h3>
+                            
+                            <!-- Price Range -->
+                            <div class="mb-5">
+                                <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2">Rango de Precio</label>
+                                <div class="flex items-center space-x-2">
+                                    <input type="number" name="min_price" placeholder="Min €" value="{{ request('min_price') }}" class="w-full text-xs py-2 px-3 border border-gray-200 dark:border-white/10 rounded bg-gray-50 dark:bg-black/20 dark:text-white focus:ring-1 focus:ring-brand-charcoal focus:outline-none">
+                                    <span class="text-gray-400">-</span>
+                                    <input type="number" name="max_price" placeholder="Max €" value="{{ request('max_price') }}" class="w-full text-xs py-2 px-3 border border-gray-200 dark:border-white/10 rounded bg-gray-50 dark:bg-black/20 dark:text-white focus:ring-1 focus:ring-brand-charcoal focus:outline-none">
+                                </div>
+                            </div>
+
+                            <!-- Sort By -->
+                            <div class="mb-6">
+                                <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2">Ordenar Por</label>
+                                <select name="sort" class="w-full text-xs py-2 px-3 border border-gray-200 dark:border-white/10 rounded bg-gray-50 dark:bg-black/20 dark:text-white focus:ring-1 focus:ring-brand-charcoal focus:outline-none cursor-pointer">
+                                    <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>Más recientes</option>
+                                    <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>Precio: Menor a Mayor</option>
+                                    <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>Precio: Mayor a Menor</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="w-full py-2.5 bg-brand-charcoal text-white text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-black transition-colors rounded">
+                                Aplicar Filtros
+                            </button>
+                        </div>
+                    </form>
+                </div>
 
                 @if (Route::has('login'))
                     @auth

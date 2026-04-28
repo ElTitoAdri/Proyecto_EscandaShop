@@ -75,9 +75,9 @@
                                 <p class="text-[10px] text-gray-400 mt-2 uppercase tracking-widest">IVA incluido</p>
                             </div>
 
-                            <button class="w-full py-4 bg-brand-charcoal text-white text-xs font-bold tracking-[0.2em] uppercase hover:bg-black transition-colors duration-300 shadow-xl">
+                            <a href="{{ route('checkout.index') }}" class="block text-center w-full py-4 bg-brand-charcoal text-white text-xs font-bold tracking-[0.2em] uppercase hover:bg-black transition-colors duration-300 shadow-xl">
                                 Finalizar Pedido
-                            </button>
+                            </a>
                             
                             <div class="mt-6 flex justify-center space-x-4 opacity-30 grayscale pointer-events-none">
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" class="h-4" alt="Visa">
