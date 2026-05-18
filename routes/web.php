@@ -7,6 +7,7 @@ use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\AdminController;
 
 Route::get('/', [PageController::class, 'about'])->name('home');
 Route::get('/tienda', [CatalogController::class, 'index'])->name('store.index');
@@ -34,11 +35,24 @@ Route::middleware('auth')->group(function () {
     Route::get('/checkout/cancel', [App\Http\Controllers\CheckoutController::class, 'cancel'])->name('checkout.cancel');
 });
 
-// Admin Routes Example
+// Admin Routes
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard'); // Podemos cambiarlo por "admin.dashboard" cuando creemos la vista
-    })->name('dashboard');
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/productos', [AdminController::class, 'products'])->name('products');
+    Route::post('/productos', [AdminController::class, 'storeProduct'])->name('products.store');
+    Route::put('/productos/{product}', [AdminController::class, 'updateProduct'])->name('products.update');
+    Route::delete('/productos/{product}', [AdminController::class, 'destroyProduct'])->name('products.destroy');
+    Route::post('/productos/{product}/toggle-visibility', [AdminController::class, 'toggleProductVisibility'])->name('products.toggle-visibility');
+    Route::get('/categorias', [AdminController::class, 'categories'])->name('categories');
+    Route::post('/categorias', [AdminController::class, 'storeCategory'])->name('categories.store');
+    Route::put('/categorias/{category}', [AdminController::class, 'updateCategory'])->name('categories.update');
+    Route::delete('/categorias/{category}', [AdminController::class, 'destroyCategory'])->name('categories.destroy');
+    Route::get('/pedidos', [AdminController::class, 'orders'])->name('orders');
+    Route::get('/usuarios', [AdminController::class, 'users'])->name('users');
+    Route::get('/mensajes', [AdminController::class, 'messages'])->name('messages');
+    Route::delete('/mensajes/{message}', [AdminController::class, 'destroyMessage'])->name('messages.destroy');
+    Route::get('/ajustes', [AdminController::class, 'settings'])->name('settings');
+    Route::post('/ajustes', [AdminController::class, 'updateSettings'])->name('settings.update');
 });
 
 require __DIR__ . '/auth.php';
