@@ -16,8 +16,10 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        $categories = \App\Models\Category::orderBy('name')->get();
         return view('profile.edit', [
             'user' => $request->user(),
+            'categories' => $categories,
         ]);
     }
 

@@ -115,4 +115,21 @@
             </div>
         </div>
     </section>
+
+    <!-- Script para scroll automático al filtrar/buscar -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Si la URL contiene parámetros de categoría, búsqueda o precios, desplazamos suavemente
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('category') || urlParams.has('search') || urlParams.has('min_price') || urlParams.has('max_price')) {
+                const catalogSection = document.getElementById('catalog');
+                if (catalogSection) {
+                    // Esperamos una milésima de segundo para que carguen bien los elementos y hacemos scroll suave
+                    setTimeout(() => {
+                        catalogSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
+                }
+            }
+        });
+    </script>
 </x-layouts.layout>

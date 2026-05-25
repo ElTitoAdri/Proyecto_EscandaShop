@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AccountController;
 
 Route::get('/', [PageController::class, 'about'])->name('home');
 Route::get('/tienda', [CatalogController::class, 'index'])->name('store.index');
@@ -33,6 +34,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/checkout', [App\Http\Controllers\CheckoutController::class, 'checkout'])->name('checkout.index');
     Route::get('/checkout/success', [App\Http\Controllers\CheckoutController::class, 'success'])->name('checkout.success');
     Route::get('/checkout/cancel', [App\Http\Controllers\CheckoutController::class, 'cancel'])->name('checkout.cancel');
+
+    // Rutas del Área "Mi Cuenta"
+    Route::get('/mi-cuenta', [AccountController::class, 'index'])->name('account.index');
+    Route::get('/mi-cuenta/pedidos/{order}', [AccountController::class, 'showOrder'])->name('account.orders.show');
+
+    // Rutas de Reseñas de Productos
+    Route::post('/productos/{product}/reseñas', [App\Http\Controllers\ReviewController::class, 'store'])->name('reviews.store');
 });
 
 // Admin Routes
