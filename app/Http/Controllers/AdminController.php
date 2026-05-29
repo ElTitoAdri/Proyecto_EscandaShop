@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Category;
 use App\Models\Message;
 use App\Models\ProductImage;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -280,5 +281,42 @@ class AdminController extends Controller
         file_put_contents($settingsPath, json_encode($settings, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
         return back()->with('success', 'Configuración guardada correctamente.');
+    }
+
+    public function reviews()
+    {
+        $reviews = Review::with(['user', 'product'])->latest()->get();
+
+        // Calculate statistics
+        $totalReviews = $reviews->count();
+        $averageRating = $reviews->avg('rating') ?: 0;
+        $pendingCount = $reviews->where('is_approved', false)->count();
+        $approvedCount = $reviews->where('is_approved', true)->count();
+
+        return view('admin.reviews', compact(
+            'reviews',
+            'totalReviews',
+            'averageRating',
+            'pendingCount',
+            'approvedCount'
+        ));
+    }
+
+    public function toggleReviewApproval(Review $review)
+    {
+        $review->update([
+            'is_approved' => !$review->is_approved
+        ]);
+
+        return back()->with('success', $review->is_approved 
+            ? 'Reseña aprobada correctamente y visible en la tienda.' 
+            : 'Reseña ocultada de la tienda correctamente.');
+    }
+
+    public function destroyReview(Review $review)
+    {
+        $review->delete();
+
+        return back()->with('success', 'Reseña eliminada correctamente.');
     }
 }

@@ -59,6 +59,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/usuarios', [AdminController::class, 'users'])->name('users');
     Route::get('/mensajes', [AdminController::class, 'messages'])->name('messages');
     Route::delete('/mensajes/{message}', [AdminController::class, 'destroyMessage'])->name('messages.destroy');
+    Route::get('/reseñas', [AdminController::class, 'reviews'])->name('reviews');
+    Route::post('/reseñas/{review}/toggle-approval', [AdminController::class, 'toggleReviewApproval'])->name('reviews.toggle-approval');
+    Route::delete('/reseñas/{review}', [AdminController::class, 'destroyReview'])->name('reviews.destroy');
     Route::get('/ajustes', [AdminController::class, 'settings'])->name('settings');
     Route::post('/ajustes', [AdminController::class, 'updateSettings'])->name('settings.update');
 });
