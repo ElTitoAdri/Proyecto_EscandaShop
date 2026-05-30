@@ -16,7 +16,7 @@ class CheckAdminRole
     public function handle(Request $request, Closure $next): Response
     {
         if (! $request->user() || ! $request->user()->isAdmin()) {
-            return redirect('/dashboard')->with('error', 'Acceso denegado: Se requieren permisos de administrador.');
+            return redirect('/mi-cuenta')->with('error', 'Acceso denegado: Se requieren permisos de administrador.');
         }
 
         return $next($request);

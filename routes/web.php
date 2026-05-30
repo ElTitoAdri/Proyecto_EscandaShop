@@ -21,10 +21,6 @@ Route::post('/carrito/añadir/{product}', [CartController::class, 'add'])->name(
 Route::patch('/carrito/actualizar', [CartController::class, 'update'])->name('cart.update');
 Route::delete('/carrito/eliminar', [CartController::class, 'remove'])->name('cart.remove');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
