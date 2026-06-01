@@ -1,4 +1,4 @@
-<x-admin-layout title="Pedidos">
+<x-layouts.admin title="Pedidos">
 
     <div class="admin-page-header">
         <div>
@@ -28,16 +28,34 @@
                         <td>{{ $order->user->name ?? 'Cliente eliminado' }}</td>
                         <td style="color: var(--admin-text-muted);">{{ $order->created_at->format('d/m/Y H:i') }}</td>
                         <td>
-                            <span class="admin-badge 
-                                @if($order->status === 'pending') admin-badge-pending
-                                @elseif($order->status === 'completed') admin-badge-completed
-                                @else admin-badge-cancelled
-                                @endif">
-                                @if($order->status === 'pending') Pendiente
-                                @elseif($order->status === 'completed') Completado
-                                @else {{ ucfirst($order->status) }}
-                                @endif
-                            </span>
+                            <div style="display: flex; flex-direction: column; gap: 6px; align-items: flex-start;">
+                                <span class="admin-badge 
+                                    @if($order->status === 'pending') admin-badge-pending
+                                    @elseif($order->status === 'paid') admin-badge-completed
+                                    @elseif($order->status === 'shipped') admin-badge-completed
+                                    @elseif($order->status === 'completed') admin-badge-completed
+                                    @else admin-badge-cancelled
+                                    @endif">
+                                    @if($order->status === 'pending') Pendiente
+                                    @elseif($order->status === 'paid') Pagado
+                                    @elseif($order->status === 'shipped') Enviado
+                                    @elseif($order->status === 'completed') Completado
+                                    @elseif($order->status === 'cancelled') Cancelado
+                                    @else {{ ucfirst($order->status) }}
+                                    @endif
+                                </span>
+                                
+                                <form action="{{ route('admin.orders.update-status', $order) }}" method="POST" style="margin: 0;">
+                                    @csrf
+                                    <select name="status" onchange="this.form.submit()" style="padding: 4px 8px; border-radius: 4px; border: 1px solid #e2e8f0; background-color: #f8fafc; font-size: 11px; font-weight: 500; color: #475569; outline: none; cursor: pointer; transition: all 0.2s; border-color: #cbd5e1;">
+                                        <option value="pending" {{ $order->status === 'pending' ? 'selected' : '' }}>Cambiar a: Pendiente</option>
+                                        <option value="paid" {{ $order->status === 'paid' ? 'selected' : '' }}>Cambiar a: Pagado</option>
+                                        <option value="shipped" {{ $order->status === 'shipped' ? 'selected' : '' }}>Cambiar a: Enviado 🚚</option>
+                                        <option value="completed" {{ $order->status === 'completed' ? 'selected' : '' }}>Cambiar a: Completado 🎉</option>
+                                        <option value="cancelled" {{ $order->status === 'cancelled' ? 'selected' : '' }}>Cambiar a: Cancelado ❌</option>
+                                    </select>
+                                </form>
+                            </div>
                         </td>
                         <td style="font-weight: 600; font-size: 16px;">{{ number_format($order->total_price, 2, ',', '.') }} €</td>
                         <td>
@@ -59,4 +77,4 @@
         </table>
     </div>
 
-</x-admin-layout>
+</x-layouts.admin>

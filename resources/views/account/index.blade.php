@@ -1,4 +1,4 @@
-<x-layouts.layout :categories="$categories" title="Mi Cuenta | EscandaShop">
+<x-layouts.app :categories="$categories" title="Mi Cuenta | EscandaShop">
     <div class="py-12 bg-gray-50 dark:bg-zinc-950 min-h-screen text-gray-800 dark:text-gray-100 transition-colors duration-400">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
@@ -179,4 +179,4 @@
 
         </div>
     </div>
-</x-layouts.layout>
+</x-layouts.app>

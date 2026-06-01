@@ -1,4 +1,4 @@
-<x-layouts.layout :categories="$categories">
+<x-layouts.app :categories="$categories">
     <!-- Hero Section -->
     <section class="relative h-[80vh] flex items-center justify-center hero-gradient">
         <div class="text-center px-4 max-w-4xl mx-auto">
@@ -85,4 +85,4 @@
             <a href="{{ route('store.index') }}" class="inline-block border-b-2 border-brand-charcoal pb-2 text-xs font-bold tracking-[0.3em] uppercase hover:text-brand-charcoal hover:border-black transition-all">Visitar la tienda</a>
         </div>
     </section>
-</x-layouts.layout>
+</x-layouts.app>

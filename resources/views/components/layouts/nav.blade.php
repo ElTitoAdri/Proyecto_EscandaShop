@@ -41,7 +41,7 @@
                     </div>
                 </div>
 
-                <a href="{{ route('home') }}" class="text-sm font-medium hover:text-brand-charcoal transition dark:text-gray-400 dark:hover:text-white">Contáctanos</a>
+                <a href="{{ route('contact.index') }}" class="text-sm font-medium hover:text-brand-charcoal transition dark:text-gray-400 dark:hover:text-white {{ Route::is('contact.index') ? 'font-bold underline' : '' }}">Contáctanos</a>
             </div>
 
             <div class="flex items-center space-x-4 md:space-x-6">

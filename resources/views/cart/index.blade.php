@@ -1,4 +1,4 @@
-<x-layouts.layout :categories="$categories" title="Carrito de Compras | EscandaShop">
+<x-layouts.app :categories="$categories" title="Carrito de Compras | EscandaShop">
     <div class="py-24 bg-brand-white">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -95,4 +95,4 @@
             @endif
         </div>
     </div>
-</x-layouts.layout>
+</x-layouts.app>

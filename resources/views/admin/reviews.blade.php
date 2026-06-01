@@ -1,4 +1,4 @@
-<x-admin-layout title="Reseñas">
+<x-layouts.admin title="Reseñas">
 
     <div class="admin-page-header">
         <div>
@@ -165,4 +165,4 @@
         </table>
     </div>
 
-</x-admin-layout>
+</x-layouts.admin>

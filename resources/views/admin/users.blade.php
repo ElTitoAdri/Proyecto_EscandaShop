@@ -1,4 +1,4 @@
-<x-admin-layout title="Usuarios">
+<x-layouts.admin title="Usuarios">
 
     <div class="admin-page-header">
         <div>
@@ -55,4 +55,4 @@
         </table>
     </div>
 
-</x-admin-layout>
+</x-layouts.admin>

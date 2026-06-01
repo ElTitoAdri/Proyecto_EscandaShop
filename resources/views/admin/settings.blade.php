@@ -1,4 +1,4 @@
-<x-admin-layout title="Ajustes">
+<x-layouts.admin title="Ajustes">
 
     <div class="admin-page-header">
         <div>
@@ -77,4 +77,4 @@
         </div>
     </form>
 
-</x-admin-layout>
+</x-layouts.admin>

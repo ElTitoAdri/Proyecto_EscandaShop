@@ -15,6 +15,9 @@ Route::get('/tienda', [CatalogController::class, 'index'])->name('store.index');
 
 Route::get('/productos/{product:slug}', [ProductController::class, 'show'])->name('products.show');
 
+Route::get('/contacto', [App\Http\Controllers\ContactController::class, 'index'])->name('contact.index');
+Route::post('/contacto', [App\Http\Controllers\ContactController::class, 'store'])->name('contact.store');
+
 // Cart Routes
 Route::get('/carrito', [CartController::class, 'index'])->name('cart.index');
 Route::post('/carrito/añadir/{product}', [CartController::class, 'add'])->name('cart.add');
@@ -52,6 +55,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::put('/categorias/{category}', [AdminController::class, 'updateCategory'])->name('categories.update');
     Route::delete('/categorias/{category}', [AdminController::class, 'destroyCategory'])->name('categories.destroy');
     Route::get('/pedidos', [AdminController::class, 'orders'])->name('orders');
+    Route::post('/pedidos/{order}/estado', [AdminController::class, 'updateOrderStatus'])->name('orders.update-status');
     Route::get('/usuarios', [AdminController::class, 'users'])->name('users');
     Route::get('/mensajes', [AdminController::class, 'messages'])->name('messages');
     Route::delete('/mensajes/{message}', [AdminController::class, 'destroyMessage'])->name('messages.destroy');

@@ -101,6 +101,13 @@ class CheckoutController extends Controller
 
             DB::commit();
 
+            // Enviar email de confirmación
+            try {
+                \Illuminate\Support\Facades\Mail::to($user->email)->send(new \App\Mail\OrderConfirmed($order));
+            } catch (\Exception $mailEx) {
+                \Illuminate\Support\Facades\Log::error("Error al enviar email de confirmación: " . $mailEx->getMessage());
+            }
+
             return view('checkout.success', compact('order', 'categories'));
         } catch (\Exception $e) {
             DB::rollBack();

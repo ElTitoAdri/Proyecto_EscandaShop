@@ -1,4 +1,4 @@
-<x-admin-layout title="Mensajes">
+<x-layouts.admin title="Mensajes">
 
     <div class="admin-page-header">
         <div>
@@ -82,4 +82,4 @@
         </table>
     </div>
 
-</x-admin-layout>
+</x-layouts.admin>

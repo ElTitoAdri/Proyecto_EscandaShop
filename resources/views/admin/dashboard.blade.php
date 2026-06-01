@@ -1,4 +1,4 @@
-<x-admin-layout title="Dashboard">
+<x-layouts.admin title="Dashboard">
 
     <div class="admin-page-header">
         <div>
@@ -127,4 +127,4 @@
         </div>
     </div>
 
-</x-admin-layout>
+</x-layouts.admin>

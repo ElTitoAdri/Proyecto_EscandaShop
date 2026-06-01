@@ -19,4 +19,17 @@ class Order extends Model
     {
         return $this->hasMany(OrderItem::class);
     }
+
+    protected static function booted()
+    {
+        static::updated(function ($order) {
+            if ($order->isDirty('status')) {
+                try {
+                    \Illuminate\Support\Facades\Mail::to($order->user->email)->send(new \App\Mail\OrderStatusUpdated($order));
+                } catch (\Exception $e) {
+                    \Illuminate\Support\Facades\Log::error("Error al enviar email de cambio de estado de pedido: " . $e->getMessage());
+                }
+            }
+        });
+    }
 }

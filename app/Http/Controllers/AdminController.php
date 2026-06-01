@@ -73,6 +73,19 @@ class AdminController extends Controller
         return view('admin.orders', compact('orders'));
     }
 
+    public function updateOrderStatus(Request $request, Order $order)
+    {
+        $request->validate([
+            'status' => 'required|string|in:pending,paid,shipped,completed,cancelled',
+        ]);
+
+        $order->update([
+            'status' => $request->status,
+        ]);
+
+        return back()->with('success', 'El estado del pedido se ha actualizado correctamente.');
+    }
+
     public function storeProduct(Request $request)
     {
         $request->validate([

@@ -1,4 +1,4 @@
-<x-layouts.layout :categories="$categories" title="Pago Cancelado | EscandaShop">
+<x-layouts.app :categories="$categories" title="Pago Cancelado | EscandaShop">
     <div class="py-32 bg-brand-white flex items-center justify-center min-h-[70vh]">
         <div class="max-w-lg mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div class="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-8">
@@ -15,4 +15,4 @@
             </a>
         </div>
     </div>
-</x-layouts.layout>
+</x-layouts.app>

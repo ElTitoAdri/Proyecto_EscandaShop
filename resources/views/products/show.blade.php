@@ -1,4 +1,4 @@
-<x-layouts.layout :categories="$categories" :title="$product->name . ' | EscandaShop'">
+<x-layouts.app :categories="$categories" :title="$product->name . ' | EscandaShop'">
     <div class="py-12 bg-white dark:bg-black">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Breadcrumbs -->
@@ -249,4 +249,4 @@
             @endif
         </div>
     </div>
-</x-layouts.layout>
+</x-layouts.app>

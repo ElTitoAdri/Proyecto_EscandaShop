@@ -17,40 +17,6 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-
-    <style>
-        .hero-gradient {
-            background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.4)), url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .dark .hero-gradient {
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=2070&auto=format&fit=crop');
-        }
-
-        .product-card:hover .product-actions {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .product-actions {
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.3s ease;
-        }
-
-        .sticky-nav {
-            backdrop-filter: blur(10px);
-            background-color: rgba(255, 255, 255, 0.9);
-            transition: background-color 0.4s ease;
-        }
-
-        .dark .sticky-nav {
-            background-color: rgba(10, 10, 10, 0.9);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-    </style>
 </head>
 <body class="antialiased font-sans text-brand-dark bg-brand-white transition-colors duration-400">
 
@@ -80,7 +46,7 @@
                     <ul class="space-y-4 text-sm text-gray-400 font-light">
                         <li><a href="#" class="hover:text-white transition">Envíos y Devoluciones</a></li>
                         <li><a href="#" class="hover:text-white transition">Guía de Tallas</a></li>
-                        <li><a href="#" class="hover:text-white transition">Contacto</a></li>
+                        <li><a href="{{ route('contact.index') }}" class="hover:text-white transition">Contacto</a></li>
                         <li><a href="#" class="hover:text-white transition">Preguntas Frecuentes</a></li>
                     </ul>
                 </div>
