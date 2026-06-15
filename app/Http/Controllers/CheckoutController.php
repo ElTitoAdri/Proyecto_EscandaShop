@@ -20,6 +20,41 @@ class CheckoutController extends Controller
 
         $user = auth()->user();
         
+        $total = 0;
+        foreach ($cart as $id => $details) {
+            $product = Product::find($id);
+            if (!$product || $product->stock < $details['quantity']) {
+                return redirect()->route('cart.index')->with('error', 'El producto ' . $details['name'] . ' ya no tiene stock suficiente.');
+            }
+            $total += $details['price'] * $details['quantity'];
+        }
+
+        $categories = \App\Models\Category::orderBy('name')->get();
+
+        return view('checkout.index', compact('cart', 'total', 'user', 'categories'));
+    }
+
+    public function process(Request $request)
+    {
+        $cart = session()->get('cart', []);
+
+        if (empty($cart)) {
+            return redirect()->route('cart.index')->with('error', 'Tu carrito está vacío.');
+        }
+
+        $user = auth()->user();
+
+        // Validar la dirección de envío
+        $validated = $request->validate([
+            'address' => ['required', 'string', 'max:255'],
+            'city' => ['required', 'string', 'max:255'],
+            'postal_code' => ['required', 'string', 'max:20'],
+            'province' => ['required', 'string', 'max:255'],
+        ]);
+
+        // Guardar/actualizar en el perfil del usuario
+        $user->update($validated);
+        
         $lineItems = [];
         foreach ($cart as $id => $details) {
             $product = Product::find($id);
@@ -39,11 +74,28 @@ class CheckoutController extends Controller
             ];
         }
 
-        // Generar la sesión de Stripe Checkout a través de Cashier
-        return $user->checkout($lineItems, [
-            'success_url' => route('checkout.success') . '?session_id={CHECKOUT_SESSION_ID}',
-            'cancel_url' => route('checkout.cancel'),
-        ]);
+        try {
+            // Generar la sesión de Stripe Checkout a través de Cashier
+            return $user->checkout($lineItems, [
+                'success_url' => route('checkout.success') . '?session_id={CHECKOUT_SESSION_ID}',
+                'cancel_url' => route('checkout.cancel'),
+            ]);
+        } catch (\Stripe\Exception\InvalidRequestException $e) {
+            if (str_contains($e->getMessage(), 'No such customer')) {
+                $user->forceFill([
+                    'stripe_id' => null,
+                    'pm_type' => null,
+                    'pm_last_four' => null,
+                    'trial_ends_at' => null,
+                ])->save();
+
+                return $user->checkout($lineItems, [
+                    'success_url' => route('checkout.success') . '?session_id={CHECKOUT_SESSION_ID}',
+                    'cancel_url' => route('checkout.cancel'),
+                ]);
+            }
+            throw $e;
+        }
     }
 
     public function success(Request $request)
@@ -75,7 +127,7 @@ class CheckoutController extends Controller
                 'user_id' => $user->id,
                 'total_price' => $total,
                 'status' => 'paid',
-                'shipping_address' => 'Dirección no especificada', // En un flujo real se pasaría desde un form
+                'shipping_address' => $user->address . ', ' . $user->city . ' (' . $user->postal_code . '), ' . $user->province,
                 'payment_id' => $sessionId,
             ]);
 

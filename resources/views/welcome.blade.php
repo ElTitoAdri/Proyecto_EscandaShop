@@ -7,7 +7,7 @@
             <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto font-light leading-relaxed italic">
                 "Creemos que una joya no es solo un accesorio, sino un fragmento de una historia personal capturado en metal y piedra."
             </p>
-            <a href="{{ route('store.index') }}" class="px-12 py-5 bg-brand-charcoal text-white text-xs font-bold tracking-[0.3em] uppercase hover:bg-black transition-all duration-500 shadow-2xl">Explorar la Colección</a>
+            <a href="{{ route('store.index') }}" class="px-12 py-5 bg-brand-charcoal dark:bg-white text-white dark:text-black text-xs font-bold tracking-[0.3em] uppercase hover:bg-black dark:hover:bg-gray-200 transition-all duration-500 shadow-2xl">Explorar la Colección</a>
         </div>
     </section>
 

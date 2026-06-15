@@ -10,15 +10,15 @@
                 Tu pedido se ha procesado correctamente. Recibirás un correo de confirmación con los detalles del envío en breve.
             </p>
 
-            @if(isset($order))
-                <div class="bg-brand-gray p-6 mb-8 text-sm">
-                    <p class="font-bold text-brand-charcoal uppercase tracking-widest mb-2">Detalles del Pedido</p>
-                    <p class="text-gray-600">Nº Pedido: #{{ str_pad($order->id, 5, '0', STR_PAD_LEFT) }}</p>
-                    <p class="text-gray-600">Total: {{ number_format($order->total_price, 2) }} €</p>
+             @if(isset($order))
+                <div class="bg-brand-gray p-6 mb-8 text-sm dark:bg-white/5 border dark:border-white/5 rounded-xl">
+                    <p class="font-bold text-brand-charcoal dark:text-amber-400 uppercase tracking-widest mb-2">Detalles del Pedido</p>
+                    <p class="text-gray-600 dark:text-gray-300">Nº Pedido: #{{ str_pad($order->id, 5, '0', STR_PAD_LEFT) }}</p>
+                    <p class="text-gray-600 dark:text-gray-300">Total: {{ number_format($order->total_price, 2) }} €</p>
                 </div>
             @endif
 
-            <a href="{{ route('store.index') }}" class="inline-block px-10 py-4 bg-brand-charcoal text-white text-xs font-bold tracking-[0.2em] uppercase hover:bg-black transition-colors duration-300 shadow-xl">
+            <a href="{{ route('store.index') }}" class="inline-block px-10 py-4 bg-brand-charcoal dark:bg-white text-white dark:text-black text-xs font-bold tracking-[0.2em] uppercase hover:bg-black dark:hover:bg-gray-200 transition-colors duration-300 shadow-xl">
                 Volver a la Tienda
             </a>
         </div>

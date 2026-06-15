@@ -14,7 +14,6 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     </head>
     <body class="font-sans text-brand-dark bg-brand-white transition-colors duration-300 dark:bg-black antialiased flex items-center justify-center min-h-screen py-12 px-4 sm:px-6 lg:px-8">
         

@@ -10,7 +10,7 @@
                 El proceso de pago ha sido cancelado o ha ocurrido un error. No se te ha cobrado ningún importe. Tus productos siguen a salvo en el carrito.
             </p>
 
-            <a href="{{ route('cart.index') }}" class="inline-block px-10 py-4 border border-brand-charcoal text-brand-charcoal text-xs font-bold tracking-widest uppercase hover:bg-brand-charcoal hover:text-white transition">
+            <a href="{{ route('cart.index') }}" class="inline-block px-10 py-4 border border-brand-charcoal dark:border-white/20 text-brand-charcoal dark:text-white text-xs font-bold tracking-widest uppercase hover:bg-brand-charcoal dark:hover:bg-white hover:text-white dark:hover:text-black transition">
                 Volver al Carrito
             </a>
         </div>

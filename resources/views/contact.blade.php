@@ -3,32 +3,32 @@
         <div class="max-w-4xl w-full mx-auto px-4 grid grid-cols-1 md:grid-cols-5 gap-12 items-stretch">
             
             <!-- Información de Contacto / Detalles de Lujo -->
-            <div class="md:col-span-2 bg-brand-charcoal text-white p-10 rounded-2xl flex flex-col justify-between shadow-2xl relative overflow-hidden border border-brand-charcoal/20">
+            <div class="md:col-span-2 bg-brand-charcoal dark:bg-zinc-900 text-white p-10 rounded-2xl flex flex-col justify-between shadow-2xl relative overflow-hidden border border-brand-charcoal/20 dark:border-white/5">
                 <!-- Decoración -->
                 <div class="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-brand-white/5 blur-2xl"></div>
                 
                 <div>
-                    <span class="text-xs uppercase tracking-[0.4em] font-bold text-brand-gray mb-4 block">Atención Premium</span>
-                    <h2 class="text-3xl font-serif mb-8 text-white tracking-wide leading-tight italic">Escríbenos tu consulta</h2>
-                    <p class="text-sm text-gray-400 font-light leading-relaxed mb-8">
+                    <span class="text-xs uppercase tracking-[0.4em] font-bold text-brand-gray dark:text-amber-400 mb-4 block">Atención Premium</span>
+                    <h2 class="text-3xl font-serif mb-8 text-white dark:text-zinc-100 tracking-wide leading-tight italic">Escríbenos tu consulta</h2>
+                    <p class="text-sm text-gray-400 dark:text-zinc-400 font-light leading-relaxed mb-8">
                         Nuestro equipo de atención al cliente está a tu entera disposición para resolver cualquier duda sobre colecciones, tallas o pedidos especiales.
                     </p>
                 </div>
                 
                 <div class="space-y-6">
                     <div class="flex items-start gap-4">
-                        <svg class="w-5 h-5 text-brand-gray mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        <svg class="w-5 h-5 text-brand-gray dark:text-amber-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                         <div>
-                            <h4 class="text-xs uppercase tracking-widest font-bold text-white mb-1">Email</h4>
-                            <p class="text-xs text-gray-400 font-light">soporte@escandashop.com</p>
+                            <h4 class="text-xs uppercase tracking-widest font-bold text-white dark:text-zinc-200 mb-1">Email</h4>
+                            <p class="text-xs text-gray-400 dark:text-zinc-400 font-light">soporte@escandashop.com</p>
                         </div>
                     </div>
                     
                     <div class="flex items-start gap-4">
-                        <svg class="w-5 h-5 text-brand-gray mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <svg class="w-5 h-5 text-brand-gray dark:text-amber-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         <div>
-                            <h4 class="text-xs uppercase tracking-widest font-bold text-white mb-1">Horario de Taller</h4>
-                            <p class="text-xs text-gray-400 font-light">Lunes a Viernes: 9:00 - 18:00</p>
+                            <h4 class="text-xs uppercase tracking-widest font-bold text-white dark:text-zinc-200 mb-1">Horario de Taller</h4>
+                            <p class="text-xs text-gray-400 dark:text-zinc-400 font-light">Lunes a Viernes: 9:00 - 18:00</p>
                         </div>
                     </div>
                 </div>
@@ -103,7 +103,7 @@
                     </div>
 
                     <button type="submit" 
-                            class="w-full py-4 bg-brand-charcoal text-white text-xs font-bold tracking-[0.2em] uppercase hover:bg-black transition-colors rounded-xl shadow-lg border border-brand-charcoal/20">
+                            class="w-full py-4 bg-brand-charcoal dark:bg-white text-white dark:text-black text-xs font-bold tracking-[0.2em] uppercase hover:bg-black dark:hover:bg-gray-200 transition-colors rounded-xl shadow-lg border border-brand-charcoal/20 dark:border-white/10">
                         Enviar Mensaje
                     </button>
                 </form>

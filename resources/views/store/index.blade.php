@@ -7,7 +7,7 @@
                 Descubre nuestra colección exclusiva de joyería artesanal diseñada para resaltar tu brillo natural en cada momento especial.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#catalog" class="px-10 py-4 bg-brand-charcoal text-white text-sm font-semibold tracking-widest uppercase hover:bg-black transition-colors duration-300">Explorar Colección</a>
+                <a href="#catalog" class="px-10 py-4 bg-brand-charcoal dark:bg-white text-white dark:text-black text-sm font-semibold tracking-widest uppercase hover:bg-black dark:hover:bg-gray-200 transition-colors duration-300">Explorar Colección</a>
                 <a href="#" class="px-10 py-4 border border-brand-charcoal text-brand-charcoal dark:border-white/20 dark:text-white text-sm font-semibold tracking-widest uppercase hover:bg-brand-gray dark:hover:bg-white/10 transition-colors duration-300">Nueva Temporada</a>
             </div>
         </div>

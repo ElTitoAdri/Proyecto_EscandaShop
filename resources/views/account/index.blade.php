@@ -151,6 +151,15 @@
                                 <p class="text-sm font-light text-gray-800 dark:text-gray-200">{{ $user->email }}</p>
                             </div>
                             <div class="border-t border-gray-100 dark:border-zinc-800/50 pt-4">
+                                <p class="text-[10px] text-gray-400 uppercase tracking-widest font-bold mb-1">Dirección de Envío</p>
+                                @if($user->address)
+                                    <p class="text-sm font-light text-gray-800 dark:text-gray-200">{{ $user->address }}</p>
+                                    <p class="text-xs font-light text-gray-500 dark:text-gray-400">{{ $user->postal_code }} {{ $user->city }} ({{ $user->province }})</p>
+                                @else
+                                    <p class="text-xs font-light text-gray-400 dark:text-gray-500 italic">Sin registrar (puedes añadirla editando tu perfil)</p>
+                                @endif
+                            </div>
+                            <div class="border-t border-gray-100 dark:border-zinc-800/50 pt-4">
                                 <p class="text-[10px] text-gray-400 uppercase tracking-widest font-bold mb-1">Rol de Acceso</p>
                                 <span class="px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded bg-gray-100 dark:bg-zinc-800 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-zinc-700">
                                     {{ ucfirst($user->role) }}

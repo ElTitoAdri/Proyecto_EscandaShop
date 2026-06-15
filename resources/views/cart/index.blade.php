@@ -20,20 +20,14 @@
                                     <p class="text-xs text-gray-400 mt-1">{{ number_format($details['price'], 2) }} €</p>
                                     
                                     <div class="mt-4 flex items-center justify-between">
-                                        <form action="{{ route('cart.update') }}" method="POST" class="flex border border-gray-200 dark:border-white/10">
+                                        <form action="{{ route('cart.update') }}" method="POST" class="flex border border-gray-200 dark:border-white/10" x-data="{ qty: {{ $details['quantity'] }} }">
                                             @csrf
                                             @method('PATCH')
                                             <input type="hidden" name="id" value="{{ $id }}">
-                                            <button type="button" @click="$refs.qty{{ $id }}.stepDown(); $refs.form{{ $id }}.submit()" class="px-3 py-1 hover:bg-gray-100 dark:hover:bg-white/5 transition">-</button>
-                                            <input type="number" name="quantity" value="{{ $details['quantity'] }}" x-ref="qty{{ $id }}" readonly
-                                                   class="w-10 text-center border-none bg-transparent focus:ring-0 text-xs font-bold">
-                                            <button type="button" @click="$refs.qty{{ $id }}.stepUp(); $refs.form{{ $id }}.submit()" class="px-3 py-1 hover:bg-gray-100 dark:hover:bg-white/5 transition">+</button>
-                                            <form id="form{{ $id }}" action="{{ route('cart.update') }}" method="POST" class="hidden">
-                                                @csrf
-                                                @method('PATCH')
-                                                <input type="hidden" name="id" value="{{ $id }}">
-                                                <input type="hidden" name="quantity" :value="$refs.qty{{ $id }}.value">
-                                            </form>
+                                            <button type="button" @click="if(qty > 1) { qty--; $nextTick(() => $el.closest('form').submit()) }" class="px-3 py-1 hover:bg-gray-100 dark:hover:bg-white/5 transition">-</button>
+                                            <input type="text" name="quantity" value="{{ $details['quantity'] }}" :value="qty" readonly
+                                                   class="w-12 text-center border-none bg-transparent focus:ring-0 text-xs font-bold text-gray-900 dark:text-white">
+                                            <button type="button" @click="qty++; $nextTick(() => $el.closest('form').submit())" class="px-3 py-1 hover:bg-gray-100 dark:hover:bg-white/5 transition">+</button>
                                         </form>
 
                                         <form action="{{ route('cart.remove') }}" method="POST">
@@ -75,7 +69,7 @@
                                 <p class="text-[10px] text-gray-400 mt-2 uppercase tracking-widest">IVA incluido</p>
                             </div>
 
-                            <a href="{{ route('checkout.index') }}" class="block text-center w-full py-4 bg-brand-charcoal text-white text-xs font-bold tracking-[0.2em] uppercase hover:bg-black transition-colors duration-300 shadow-xl">
+                            <a href="{{ route('checkout.index') }}" class="block text-center w-full py-4 bg-brand-charcoal dark:bg-white text-white dark:text-black text-xs font-bold tracking-[0.2em] uppercase hover:bg-black dark:hover:bg-gray-200 transition-colors duration-300 shadow-xl">
                                 Finalizar Pedido
                             </a>
                             
@@ -90,7 +84,7 @@
             @else
                 <div class="text-center py-20">
                     <p class="text-gray-400 font-light mb-8">Tu carrito está vacío en este momento.</p>
-                    <a href="{{ route('home') }}" class="inline-block px-10 py-4 border border-brand-charcoal text-brand-charcoal text-xs font-bold tracking-widest uppercase hover:bg-brand-charcoal hover:text-white transition">Volver a la tienda</a>
+                    <a href="{{ route('home') }}" class="inline-block px-10 py-4 border border-brand-charcoal dark:border-white/20 text-brand-charcoal dark:text-white text-xs font-bold tracking-widest uppercase hover:bg-brand-charcoal dark:hover:bg-white hover:text-white dark:hover:text-black transition">Volver a la tienda</a>
                 </div>
             @endif
         </div>

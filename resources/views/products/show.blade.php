@@ -84,7 +84,7 @@
                         </div>
 
                         <button onclick="addToCart('{{ $product->id }}', '{{ $product->name }}')" 
-                                class="w-full py-5 bg-brand-charcoal text-white text-sm font-semibold tracking-widest uppercase hover:bg-black transition-colors duration-300 flex items-center justify-center space-x-3">
+                                class="w-full py-5 bg-brand-charcoal dark:bg-white text-white dark:text-black text-sm font-semibold tracking-widest uppercase hover:bg-black dark:hover:bg-gray-200 transition-colors duration-300 flex items-center justify-center space-x-3">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                             </svg>
@@ -203,14 +203,14 @@
                                                   placeholder="Escribe tu opinión sobre esta joya..."></textarea>
                                     </div>
 
-                                    <button type="submit" class="w-full py-4 bg-brand-charcoal hover:bg-black text-white text-xs font-bold uppercase tracking-widest transition-colors duration-300 rounded-xl flex items-center justify-center">
+                                    <button type="submit" class="w-full py-4 bg-brand-charcoal dark:bg-white hover:bg-black dark:hover:bg-gray-200 text-white dark:text-black text-xs font-bold uppercase tracking-widest transition-colors duration-300 rounded-xl flex items-center justify-center">
                                         Publicar Reseña
                                     </button>
                                 </form>
                             @else
                                 <div class="text-center py-6">
                                     <p class="text-sm font-light text-gray-500 dark:text-gray-400 mb-6">Debes iniciar sesión para poder dejar tu valoración sobre este producto.</p>
-                                    <a href="{{ route('login') }}" class="inline-block w-full py-4 bg-brand-charcoal hover:bg-black text-white text-xs font-bold uppercase tracking-widest transition rounded-xl">
+                                    <a href="{{ route('login') }}" class="inline-block w-full py-4 bg-brand-charcoal dark:bg-white hover:bg-black dark:hover:bg-gray-200 text-white dark:text-black text-xs font-bold uppercase tracking-widest transition rounded-xl">
                                         Iniciar Sesión
                                     </a>
                                 </div>

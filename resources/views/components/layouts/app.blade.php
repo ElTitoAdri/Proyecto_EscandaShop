@@ -15,8 +15,6 @@
 
     <!-- Styles -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </head>
 <body class="antialiased font-sans text-brand-dark bg-brand-white transition-colors duration-400">
 
@@ -36,9 +34,9 @@
                         Uniendo la tradición joyera con el diseño contemporáneo para crear piezas que cuentan historias.
                     </p>
                     <div class="flex space-x-6 justify-center md:justify-start">
-                        <a href="#" class="text-gray-400 hover:text-white transition uppercase text-xs tracking-widest font-bold">Instagram</a>
-                        <a href="#" class="text-gray-400 hover:text-white transition uppercase text-xs tracking-widest font-bold">Facebook</a>
-                        <a href="#" class="text-gray-400 hover:text-white transition uppercase text-xs tracking-widest font-bold">Pinterest</a>
+                        <a href="https://www.instagram.com/escandashop/?hl=es" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition uppercase text-xs tracking-widest font-bold">Instagram</a>
+                        <a href="https://www.facebook.com/escandashop" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition uppercase text-xs tracking-widest font-bold">Facebook</a>
+                        <a href="https://www.tiktok.com/@escandashop?_t=8pFRJeprgNU&_r=1" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition uppercase text-xs tracking-widest font-bold">TikTok</a>
                     </div>
                 </div>
                 <div class="text-center md:text-left">
@@ -76,7 +74,7 @@
     </footer>
 
     <!-- Simple Toast for Mockup -->
-    <div id="toast" class="fixed bottom-10 right-10 bg-brand-charcoal text-white px-6 py-4 rounded shadow-2xl transition translate-y-20 opacity-0 z-[100]">
+    <div id="toast" class="fixed bottom-10 right-10 bg-brand-charcoal dark:bg-zinc-900 border dark:border-white/10 text-white px-6 py-4 rounded shadow-2xl transition translate-y-20 opacity-0 z-[100]">
         <span id="toast-message"></span>
     </div>
 

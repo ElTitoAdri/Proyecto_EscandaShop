@@ -30,6 +30,10 @@ class ProfileTest extends TestCase
             ->patch('/profile', [
                 'name' => 'Test User',
                 'email' => 'test@example.com',
+                'address' => 'Calle Gran Via 1',
+                'city' => 'Madrid',
+                'postal_code' => '28001',
+                'province' => 'Madrid',
             ]);
 
         $response
@@ -40,6 +44,10 @@ class ProfileTest extends TestCase
 
         $this->assertSame('Test User', $user->name);
         $this->assertSame('test@example.com', $user->email);
+        $this->assertSame('Calle Gran Via 1', $user->address);
+        $this->assertSame('Madrid', $user->city);
+        $this->assertSame('28001', $user->postal_code);
+        $this->assertSame('Madrid', $user->province);
         $this->assertNull($user->email_verified_at);
     }
 

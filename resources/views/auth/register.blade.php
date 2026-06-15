@@ -51,7 +51,7 @@
 
         <!-- Submit Button -->
         <button type="submit" 
-                class="w-full py-3.5 bg-brand-charcoal text-white text-xs font-bold tracking-[0.2em] uppercase hover:bg-black transition-colors rounded-xl shadow-lg border border-brand-charcoal/20 flex items-center justify-center">
+                class="w-full py-3.5 bg-brand-charcoal dark:bg-white text-white dark:text-black text-xs font-bold tracking-[0.2em] uppercase hover:bg-black dark:hover:bg-gray-200 transition-colors rounded-xl shadow-lg border border-brand-charcoal/20 dark:border-white/10 flex items-center justify-center">
             Crear Cuenta
         </button>
 

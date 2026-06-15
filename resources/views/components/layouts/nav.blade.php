@@ -98,7 +98,7 @@
                                 </select>
                             </div>
 
-                            <button type="submit" class="w-full py-2.5 bg-brand-charcoal text-white text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-black transition-colors rounded">
+                            <button type="submit" class="w-full py-2.5 bg-brand-charcoal dark:bg-white text-white dark:text-black text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-black dark:hover:bg-gray-200 transition-colors rounded">
                                 Aplicar Filtros
                             </button>
                         </div>

@@ -12,10 +12,13 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Cashier\Billable;
 
-#[Fillable(['name', 'email', 'password', 'role'])]
+#[Fillable(['name', 'email', 'password', 'role', 'address', 'city', 'postal_code', 'province'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
+    protected $table = 'users';
+
+    protected $fillable = ['name', 'email', 'password', 'role', 'address', 'city', 'postal_code', 'province'];
     public function cartItems(): HasMany
     {
         return $this->hasMany(CartItem::class);
